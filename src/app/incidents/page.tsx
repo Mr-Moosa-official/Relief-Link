@@ -77,148 +77,150 @@ export default function IncidentsPage() {
         <p className="text-muted-foreground">Provide details about the incident to dispatch help.</p>
       </div>
 
-      <div className="grid gap-8 lg:grid-cols-5">
-        <div className="lg:col-span-3">
-          <Card>
-            <CardHeader>
-              <CardTitle>Incident Details</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <Form {...form}>
-                <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-                  <FormField
-                    control={form.control}
-                    name="title"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>Incident Title</FormLabel>
-                        <FormControl>
-                          <Input placeholder="e.g., Warehouse Fire at 5th and Main" {...field} />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-
-                  <div className="grid gap-6 md:grid-cols-2">
-                    <FormField
-                      control={form.control}
-                      name="type"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>Incident Type</FormLabel>
-                           <Select onValueChange={field.onChange} defaultValue={field.value}>
-                            <FormControl>
-                              <SelectTrigger>
-                                <SelectValue placeholder="Select incident type" />
-                              </SelectTrigger>
-                            </FormControl>
-                            <SelectContent>
-                                {incidentTypes.map(type => (
-                                    <SelectItem key={type.value} value={type.value}>
-                                        <div className="flex items-center gap-2">
-                                            {type.icon}
-                                            {type.label}
-                                        </div>
-                                    </SelectItem>
-                                ))}
-                            </SelectContent>
-                          </Select>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-                    <FormField
-                      control={form.control}
-                      name="urgency"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>Urgency Level</FormLabel>
-                          <Select onValueChange={field.onChange} defaultValue={field.value}>
-                            <FormControl>
-                              <SelectTrigger>
-                                <SelectValue placeholder="Select urgency level" />
-                              </SelectTrigger>
-                            </FormControl>
-                            <SelectContent>
-                              <SelectItem value="low">Low</SelectItem>
-                              <SelectItem value="medium">Medium</SelectItem>
-                              <SelectItem value="high">High</SelectItem>
-                              <SelectItem value="critical">Critical</SelectItem>
-                            </SelectContent>
-                          </Select>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-                  </div>
-                  
-                  <FormField
-                    control={form.control}
-                    name="description"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>Description</FormLabel>
-                        <FormControl>
-                          <Textarea
-                            placeholder="Provide as much detail as possible: number of people affected, specific hazards, etc."
-                            className="min-h-[120px]"
-                            {...field}
-                          />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-
-                  <Button type="submit" className="w-full">
-                    <Send className="mr-2 h-4 w-4" />
-                    Submit Report
-                  </Button>
-                </form>
-              </Form>
-            </CardContent>
-          </Card>
-        </div>
-        <div className="lg:col-span-2">
-            <Card className="h-full">
+      <Form {...form}>
+        <form onSubmit={form.handleSubmit(onSubmit)}>
+          <div className="grid gap-8 lg:grid-cols-5">
+            <div className="lg:col-span-3">
+              <Card>
                 <CardHeader>
-                    <CardTitle>Location</CardTitle>
+                  <CardTitle>Incident Details</CardTitle>
                 </CardHeader>
-                <CardContent className="space-y-4">
-                     <FormField
+                <CardContent>
+                  <div className="space-y-6">
+                    <FormField
+                      control={form.control}
+                      name="title"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Incident Title</FormLabel>
+                          <FormControl>
+                            <Input placeholder="e.g., Warehouse Fire at 5th and Main" {...field} />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+
+                    <div className="grid gap-6 md:grid-cols-2">
+                      <FormField
                         control={form.control}
-                        name="location"
+                        name="type"
                         render={({ field }) => (
                           <FormItem>
-                            <FormLabel className="sr-only">Location Address</FormLabel>
-                            <FormControl>
-                                <div className="relative">
-                                    <MapPin className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-                                    <Input placeholder="Enter address or coordinates" className="pl-9" {...field} />
-                                </div>
-                            </FormControl>
-                            <FormDescription>The map will update as you type.</FormDescription>
+                            <FormLabel>Incident Type</FormLabel>
+                            <Select onValueChange={field.onChange} defaultValue={field.value}>
+                              <FormControl>
+                                <SelectTrigger>
+                                  <SelectValue placeholder="Select incident type" />
+                                </SelectTrigger>
+                              </FormControl>
+                              <SelectContent>
+                                  {incidentTypes.map(type => (
+                                      <SelectItem key={type.value} value={type.value}>
+                                          <div className="flex items-center gap-2">
+                                              {type.icon}
+                                              {type.label}
+                                          </div>
+                                      </SelectItem>
+                                  ))}
+                              </SelectContent>
+                            </Select>
                             <FormMessage />
                           </FormItem>
                         )}
                       />
-                    {mapPlaceholder && (
-                        <div className="aspect-video w-full overflow-hidden rounded-md border">
-                        <Image
-                            src={mapPlaceholder.imageUrl}
-                            alt={mapPlaceholder.description}
-                            width={800}
-                            height={600}
-                            className="h-full w-full object-cover"
-                            data-ai-hint={mapPlaceholder.imageHint}
-                        />
-                        </div>
-                    )}
+                      <FormField
+                        control={form.control}
+                        name="urgency"
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormLabel>Urgency Level</FormLabel>
+                            <Select onValueChange={field.onChange} defaultValue={field.value}>
+                              <FormControl>
+                                <SelectTrigger>
+                                  <SelectValue placeholder="Select urgency level" />
+                                </SelectTrigger>
+                              </FormControl>
+                              <SelectContent>
+                                <SelectItem value="low">Low</SelectItem>
+                                <SelectItem value="medium">Medium</SelectItem>
+                                <SelectItem value="high">High</SelectItem>
+                                <SelectItem value="critical">Critical</SelectItem>
+                              </SelectContent>
+                            </Select>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
+                    </div>
+                    
+                    <FormField
+                      control={form.control}
+                      name="description"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Description</FormLabel>
+                          <FormControl>
+                            <Textarea
+                              placeholder="Provide as much detail as possible: number of people affected, specific hazards, etc."
+                              className="min-h-[120px]"
+                              {...field}
+                            />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+
+                    <Button type="submit" className="w-full">
+                      <Send className="mr-2 h-4 w-4" />
+                      Submit Report
+                    </Button>
+                  </div>
                 </CardContent>
-            </Card>
-        </div>
-      </div>
+              </Card>
+            </div>
+            <div className="lg:col-span-2">
+                <Card className="h-full">
+                    <CardHeader>
+                        <CardTitle>Location</CardTitle>
+                    </CardHeader>
+                    <CardContent className="space-y-4">
+                        <FormField
+                          control={form.control}
+                          name="location"
+                          render={({ field }) => (
+                            <FormItem>
+                              <FormLabel className="sr-only">Location Address</FormLabel>
+                              <FormControl>
+                                  <div className="relative">
+                                      <MapPin className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+                                      <Input placeholder="Enter address or coordinates" className="pl-9" {...field} />
+                                  </div>
+                              </FormControl>
+                              <FormDescription>The map will update as you type.</FormDescription>
+                              <FormMessage />
+                            </FormItem>
+                          )}
+                        />
+                      {mapPlaceholder && (
+                          <div className="aspect-video w-full overflow-hidden rounded-md border">
+                          <Image
+                              src={mapPlaceholder.imageUrl}
+                              alt={mapPlaceholder.description}
+                              width={800}
+                              height={600}
+                              className="h-full w-full object-cover"
+                              data-ai-hint={mapPlaceholder.imageHint}
+                          />
+                          </div>
+                      )}
+                    </CardContent>
+                </Card>
+            </div>
+          </div>
+        </form>
+      </Form>
     </div>
   );
 }
