@@ -1,7 +1,7 @@
 'use client';
 
-import { useState, useEffect, useOptimistic } from 'react';
-import { useFormState, useFormStatus } from 'react-dom';
+import { useState, useEffect, useOptimistic, useActionState } from 'react';
+import { useFormStatus } from 'react-dom';
 import { useToast } from '@/hooks/use-toast';
 import { checkResourcesAction, type ActionState } from './actions';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
@@ -52,7 +52,7 @@ export default function ResourcesPage() {
     (state, needToRemove: string) => state.filter((need) => need !== needToRemove)
   );
   
-  const [state, formAction] = useFormState(checkResourcesAction, initialState);
+  const [state, formAction] = useActionState(checkResourcesAction, initialState);
 
   useEffect(() => {
     if (state.message) {
