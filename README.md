@@ -11,7 +11,7 @@ Relief Link helps disaster response teams:
 
 Collect real-time incident reports with location data
 
-Register and manage volunteers with skills and availability
+Register  and manage volunteers with skills and availability
 
 Track and update relief resources intelligently
 
