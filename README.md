@@ -5,7 +5,7 @@ It enables incident reporting, volunteer coordination, intelligent resource trac
 
 Relief Link focuses on speed, clarity, and coordination during emergencies, helping relief efforts respond faster and more effectively.
 
-🚀 What Relief Link Does
+🚀 What Relief  Link Does
 
 Relief Link helps disaster response teams:
 
